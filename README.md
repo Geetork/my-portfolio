@@ -1,5 +1,4 @@
 # SOFTWARE DEVELOPER 
-email: GALINALEESPB@GMAIL.COM
 
 ## SUMMARY
 Dedicated Software Developer with experience in React, JS, HTML, and CSS, showcasing a proven track record in
