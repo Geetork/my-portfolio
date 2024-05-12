@@ -5,10 +5,10 @@ import { arrow } from '../assets/icons';
 
 const InfoBox = ({ text, link, btnText }) => (
     <div className='info-box'>
-        <p className='font-medium sm:text-xl text-center'>
+        <p className='sm:text-xl text-center'>
             {text}
         </p>
-        <Link to={link} className='neo-brutalism-white neo-btn'>
+        <Link to={link} className='neo-brutalism-pink neo-btn'>
             {btnText}
             <img src={arrow} className="w-4 h-4 object-contain" />
         </Link>
@@ -17,10 +17,10 @@ const InfoBox = ({ text, link, btnText }) => (
 
 const renderContent = {
     1: (
-        <h1 className='sm:text-xl sm:leading-snug text-center neo-brutalism-blue py-4 px-8 text-white mx-5'>
-            Hi, I am <span className='font-semibold'>Galina</span> ✨
+        <h1 className='sm:text-xl sm:leading-snug text-center neo-brutalism-white py-4 px-8 text-black mx-5'>
+            Hi, I am <span className='font-bold'>Galina</span> ✨
             <br />
-            A Software Engineer from Russia
+            A Dedicated Software Developer with experience in React
         </h1>
     ),
     2: (

@@ -1,22 +1,42 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Loader from '../components/Loader';
-import Island from '../models/Island';
-import Sky from '../models/Sky';
-import Bird from '../models/Bird';
-import Plane from '../models/Plane';
 import HomeInfo from '../components/HomeInfo';
 import sakura from '../assets/sakura.mp3';
 import { soundoff, soundon } from '../assets/icons';
+import Cloud from '../models/Cloud';
 
 const Home = () => {
   const ref = useRef(new Audio(sakura));
-  ref.current.volume= 0.4;
+  ref.current.volume = 0.4;
   ref.current.loop = true;
 
   const [isPlayingMusic, setIsPlayingMusic] = useState(false)
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
+  const [cloud, setCloud] = useState([[1, 1, 1],  [0, -1, 0]]);
+
+  const adjustCloudForScreenSize = () => {
+    let screenScale, screenPosition;
+
+    if (window.innerWidth < 564) {
+      screenScale = [0.8, 0.8, 0.8];
+      screenPosition = [0, -1, 0];
+    } else {
+      screenScale = [1, 1, 1];
+      screenPosition = [0, -1, 0];
+    };
+
+    setCloud([screenScale, screenPosition]);
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', adjustCloudForScreenSize);
+
+    return () => {
+      window.removeEventListener('resize', adjustCloudForScreenSize);
+    }
+  }, []);
 
   useEffect(() => {
     if (isPlayingMusic) {
@@ -28,40 +48,9 @@ const Home = () => {
     }
   }, [isPlayingMusic])
 
-  const adjustIslandForScreenSize = () => {
-    let screenScale;
-    let screenPosition = [0, -6.5, -43];
-    let rotation = [0.1, 4.7, 0]
-
-    if (window.innerWidth < 768) {
-      screenScale = [0.7, 0.7, 0.7];
-    } else {
-      screenScale = [0.9, 0.9, 0.9];
-    }
-
-    return [screenScale, screenPosition, rotation]
-  }
-
-  const adjustPlaneForScreenSize = () => {
-    let screenScale, screenPosition;
-
-    if (window.innerWidth < 768) {
-      screenScale = [1, 1, 1];
-      screenPosition = [-2, 0, 0];
-    } else {
-      screenScale = [2, 2, 2];
-      screenPosition = [-3, 0, 0];
-    }
-
-    return [screenScale, screenPosition]
-  }
-
-  const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
-  const [planeScale, planePosition] = adjustPlaneForScreenSize();
-
   return (
     <section className="w-full h-screen relative">
-      <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
+      <div className="absolute top-20 left-0 right-0 z-10 flex items-center justify-center">
         { currentStage && <HomeInfo currentStage={currentStage}/>}
       </div>
 
@@ -73,21 +62,13 @@ const Home = () => {
             <ambientLight intesity={2}/>
             <hemisphereLight skyColor='#c1e1ff' groundColor="#000000"/>
 
-            <Bird />
-            <Sky
-              isRotating={isRotating}/>
-            <Island 
-              isRotating={isRotating}
-              position={islandPosition}
-              scale={islandScale}
-              rotation={islandRotation}
-              setIsRotating={setIsRotating}
-              setCurrentStage={setCurrentStage}/>
-            <Plane 
-              scale={planeScale} 
-              position={planePosition}
-              isRotating={isRotating}
-              rotation={[0, 20, 0]}/>
+              <Cloud
+                position={cloud[1]}
+                scale={cloud[0]}
+                isRotating={isRotating}
+                setIsRotating={setIsRotating}
+                setCurrentStage={setCurrentStage} />
+
           </Suspense>
       </Canvas>
 

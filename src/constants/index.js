@@ -141,4 +141,11 @@ export const projects = [
         description: 'Developed a web application that recieves and posts cafe orders.',
         link: 'https://github.com/Geetork/react-burger',
     },
+    {
+        iconUrl: pricewise,
+        theme: 'btn-back-red',
+        name: 'Darisha',
+        description: 'Developed a web application that focused on selling personalized gift packaging.',
+        link: 'https://www.darishapresents.ru/',
+    },
 ];

@@ -8,15 +8,14 @@ const Projects = () => {
   return (
     <section className='max-container'>
       <h1 className='head-text'>
-        My <span className='blue-gradient_text font-semibold drop-shadow'>Project</span>
+        My <span className='pink-gradient_text font-semibold drop-shadow'>Projects</span>
       </h1>
 
       <div className='mt-5 flex flex-col gap-3 text-slate-500'>
         <p>
-        I've embarked on numberous projects throughout the years,
-        byt these are the ones I hold closest to my heart. Many of them are
-        open-source, so if you come across something that piques your interest, feel free
-        to explore the codebase and contribute your ides for further enhancement.
+        Over the years, I've created numerous projects, but there are a few that I cherish most deeply.
+        Many of these projects are open-source, so if you find something that catches your interest, 
+        feel free to delve into the codebase.
         </p>
       </div>
 
